@@ -1,7 +1,7 @@
 # AWS ECR Cleaner
 - AWS ECR Cleaner 是一个用于管理和清理 AWS Elastic Container Registry (ECR) 中未使用或过期镜像的工具。
 
-`
+```
 aws-ecr-cleaner/
 ├── IMG_LIST
 │   ├── MGMT_IMG_LIST.txt     # 管理环境的镜像列表文件
@@ -29,9 +29,8 @@ aws-ecr-cleaner/
 └── logs                      # 程序运行日志文件目录
     ├── ecr_cleaner_app_YYYYMMDD_HHMMSS.log
     └── ...                 # 其它日志文件
-`
+```
 
-`
 ###### 该项目能够：
 - 扫描 ECR 仓库，基于正则表达式匹配需要处理的仓库。
 - 根据配置规则过滤出候选删除镜像（支持未打标签镜像和打标签镜像）。
