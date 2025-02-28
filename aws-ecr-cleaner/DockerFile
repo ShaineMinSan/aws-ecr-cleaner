@@ -1,0 +1,30 @@
+# 构建阶段：使用 Go 官方 Alpine 镜像
+# FROM golang:1.20-alpine AS builder
+FROM golang:1.23 AS builder
+
+WORKDIR /app
+
+# 复制 go.mod 和 go.sum 下载依赖
+COPY go.mod go.sum ./
+RUN go mod download
+
+# 复制项目所有代码
+COPY . .
+
+# 构建可执行文件，关闭 CGO 以生成静态二进制文件
+RUN CGO_ENABLED=0 GOOS=linux go build -o aws-ecr-cleaner ./cmd/main.go
+
+# 运行阶段：使用轻量级 Alpine 镜像
+FROM alpine:latest
+WORKDIR /
+
+# 复制构建好的二进制文件和必要的配置、镜像列表
+COPY --from=builder /app/aws-ecr-cleaner /aws-ecr-cleaner
+COPY --from=builder /app/.env .env
+COPY --from=builder /app/IMG_LIST ./IMG_LIST
+
+# 创建日志目录
+RUN mkdir -p /logs
+
+# 设置启动命令
+ENTRYPOINT ["/aws-ecr-cleaner"]
