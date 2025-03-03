@@ -182,7 +182,7 @@ logs/
 
 
 
-`
+```
 ENV=pre
 DEBUG=true
 DRYRUN=false
@@ -195,27 +195,28 @@ HOLD_TAG_REGEX=.*2\.(84|85|86|87|88|89|90).*$
 AWS_REGION=ap-northeast-1
 LOGDIR=./logs
 AUTO_CONFIRM=true
-INTERACTIVE_MODE=false`
+INTERACTIVE_MODE=false
+```
 
 ###### 多容器获取镜像地址
 - reference the IMG_LIST/list_img.sh
 
 #### 除掉非业务项目开头的镜像地址
-`
+```
 EXCLUDE_REPO_REGEX=^(f?saas)OR^(devops)
 TARGET_REPO_REGEX=.*
 HOLD_TAG_REGEX=releaseOR2\.(84|85|86|87|88|89|90)
-`
+```
 
-`
+```
 EXCLUDE_REPO_REGEX=searcherORboom
 TARGET_REPO_REGEX=^(middleware)OR^(devops)
 HOLD_TAG_REGEX=v\.*OR(2025|2024)
-`
+```
 
 #### 业务项目开头的镜像地址不包含镜像里面带有release or 版本号(2.84 ~ 2.90)
-`
+```
 EXCLUDE_REPO_REGEX=
 TARGET_REPO_REGEX=^(f?saas)
 HOLD_TAG_REGEX=releaseOR2\.(84|85|86|87|88|89|90) OR HOLD_TAG_REGEX=.*2\.(84|85|86|87|88|89|90).*$
-`
+```
